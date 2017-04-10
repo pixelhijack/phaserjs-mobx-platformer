@@ -1,3 +1,5 @@
+import ExtendedSprite from '../components/ExtendedSprite';
+
 class GameState{
     constructor(gameConfig) {
         this.gameConfig = gameConfig;
@@ -29,9 +31,10 @@ class GameState{
         );
 
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        this.game.stage.backgroundColor = '#fff';
 
         // [PLAYER]
-        this.player = this.game.add.sprite(200, 200, 'player');
+        this.player = new ExtendedSprite(this.game, 200, 200, 'player');
 
         // [ENEMY]
         this.enemy = this.game.add.sprite(400, 200, 'dino');
@@ -53,6 +56,11 @@ class GameState{
         } else if(this.keys.right.isDown){
             this.player.x++;
         }
+
+        // collide
+        this.game.physics.arcade.collide(this.player, this.enemies, function(player, enemy){
+            console.log('collision!', arguments);
+        });
     }
 }
 
