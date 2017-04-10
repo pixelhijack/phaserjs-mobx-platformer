@@ -1,21 +1,22 @@
-function GameState(){
+class GameState{
+    constructor(gameConfig) {
+        this.gameConfig = gameConfig;
+    }
 
+    init(configs){
+        console.log('[PHASER][Component][Init]', configs);
+    }
+
+    preload(){
+        console.log('[PHASER][Component][Preload]');
+    }
+    create(){
+        console.log('[PHASER][Component][Create]');
+    }
+    update(){
+        console.log('[PHASER][Component][Update]');
+    }
 }
 
-GameState.prototype.init = function(configs){
-    console.log('[PHASER][Component][Init]', configs);
-};
-
-GameState.prototype.preload = function(){
-    console.log('[PHASER][Component][Preload]');
-};
-
-GameState.prototype.create = function(){
-    console.log('[PHASER][Component][Create]');
-};
-
-GameState.prototype.update = function(){
-    console.log('[PHASER][Component][Update]');
-};
 
 module.exports = GameState;
