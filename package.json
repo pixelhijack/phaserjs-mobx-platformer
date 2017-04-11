@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "webpack --colors --progress --watch -d"
+    "build": "webpack --colors --progress --watch"
   },
   "keywords": [
     "phaserjs",
@@ -18,8 +18,10 @@
   "dependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "^6.24.1",
     "express": "^4.15.2",
+    "mobx": "^3.1.9",
     "webpack": "^2.3.3"
   }
 }
