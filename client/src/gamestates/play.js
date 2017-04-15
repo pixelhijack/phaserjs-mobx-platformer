@@ -61,6 +61,20 @@ class GameState{
         // bind keys
         this.keys = this.game.input.keyboard.createCursorKeys();
         this.keys.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+        // score text
+        this.menu = this.game.add.text(
+            150,
+            0,
+            "Life: " + this.player.spriteState.life,
+            { font: "24px Courier", fill: "#000", align: "center" }
+        );
+        this.setMenu = life => {
+            this.menu.setText("Life: " + life);
+        };
+        mobx.observe(this.player.spriteState, change => {
+            this.setMenu(this.player.spriteState.life);
+        });
     }
     update(){
         console.log('[PHASER][Component][Update]');
