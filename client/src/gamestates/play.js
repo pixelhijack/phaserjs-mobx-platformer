@@ -6,6 +6,7 @@ class GameState{
         this.keys = undefined;
         this.player = undefined;
         this.enemy = undefined;
+        this.gameState = undefined;
     }
 
     init(configs){
@@ -33,8 +34,12 @@ class GameState{
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.game.stage.backgroundColor = '#fff';
 
+        this.gameState = mobx.observable({
+            hit: false
+        });
+
         // [PLAYER]
-        this.player = new ExtendedSprite(this.game, 200, 200, 'player');
+        this.player = new ExtendedSprite(this.game, 200, 200, 'player', this.gameState);
 
         // [ENEMY]
         this.enemy = this.game.add.sprite(400, 200, 'dino');
@@ -53,6 +58,9 @@ class GameState{
         // move
         if(this.keys.left.isDown){
             this.player.x--;
+            mobx.autorun(() => {
+                this.gameState.hit = true;
+            });
         } else if(this.keys.right.isDown){
             this.player.x++;
         }
