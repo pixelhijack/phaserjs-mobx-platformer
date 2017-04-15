@@ -7,6 +7,7 @@ class ExtendedSprite extends Phaser.Sprite{
         this.anchor.setTo(0.5, 0.5);
         this.body.collideWorldBounds = true;
         this.checkWorldBounds = true;
+        this.body.gravity.y = 500;
         mobx.observe(gameState, change => {
             console.log('change', change, gameState);
         });
@@ -17,6 +18,12 @@ class ExtendedSprite extends Phaser.Sprite{
             this.spriteState = Object.assign(this.spriteState, change);
             console.log('[%s] life: ', sprite, this.spriteState.life);
         });
+    }
+
+    jump(){
+        if(this.body.touching.down || this.body.blocked.down){
+            this.body.velocity.y -= 300;
+        }
     }
 
     update(){

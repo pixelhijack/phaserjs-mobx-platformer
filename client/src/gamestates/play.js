@@ -54,6 +54,7 @@ class GameState{
 
         // [ENEMY]
         this.enemy = new ExtendedSprite(this.game, 400, 200, 'dino', this.gameState);
+        this.enemy.body.velocity.x = Math.random() * (-10) - 10;
 
         this.game.camera.follow(this.player);
 
@@ -69,14 +70,18 @@ class GameState{
         // move
         if(this.keys.left.isDown){
             this.player.body.velocity.x--;
-            this.player.updateState({ life: this.player.spriteState.life - 1 });
         } else if(this.keys.right.isDown){
             this.player.body.velocity.x++;
         }
 
+        if(this.keys.up.isDown){
+            this.player.jump();
+        }
+
         // collide
-        this.game.physics.arcade.collide(this.player, this.enemy, function(player, enemy){
+        this.game.physics.arcade.overlap(this.player, this.enemy, (player, enemy) => {
             console.log('collision!', arguments);
+            this.player.updateState({ life: this.player.spriteState.life - 1 });
         });
     }
 }
