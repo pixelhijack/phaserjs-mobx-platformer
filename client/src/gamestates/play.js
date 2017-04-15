@@ -35,19 +35,25 @@ class GameState{
         this.game.stage.backgroundColor = '#fff';
 
         this.gameState = mobx.observable({
-            hit: false,
-            counter: 0
+            initialised: false,
+            score: 0
         });
 
-        this.updateState = mobx.action(() => {
-            this.gameState.counter++;
+        this.updateState = mobx.action((change) => {
+            this.gameState = Object.assign(this.gameState, change);
         });
+
+        mobx.observe(this.gameState, change => {
+            console.log('[gameState] change', change, this.gameState);
+        });
+
+        this.updateState({ initialised: true });
 
         // [PLAYER]
         this.player = new ExtendedSprite(this.game, 200, 200, 'player', this.gameState);
 
         // [ENEMY]
-        this.enemy = this.game.add.sprite(400, 200, 'dino');
+        this.enemy = new ExtendedSprite(this.game, 400, 200, 'dino', this.gameState);
 
         this.game.camera.follow(this.player);
 
@@ -63,7 +69,7 @@ class GameState{
         // move
         if(this.keys.left.isDown){
             this.player.x--;
-            this.updateState();
+            this.player.updateState({ life: this.player.spriteState.life - 1 });
         } else if(this.keys.right.isDown){
             this.player.x++;
         }

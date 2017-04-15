@@ -10,6 +10,13 @@ class ExtendedSprite extends Phaser.Sprite{
         mobx.observe(gameState, change => {
             console.log('change', change, gameState);
         });
+        this.spriteState = mobx.observable({
+            life: 10
+        });
+        this.updateState = mobx.action((change) => {
+            this.spriteState = Object.assign(this.spriteState, change);
+            console.log('[%s] life: ', sprite, this.spriteState.life);
+        });
     }
 
     update(){
