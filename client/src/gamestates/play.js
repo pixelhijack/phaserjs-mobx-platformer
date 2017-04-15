@@ -35,7 +35,12 @@ class GameState{
         this.game.stage.backgroundColor = '#fff';
 
         this.gameState = mobx.observable({
-            hit: false
+            hit: false,
+            counter: 0
+        });
+
+        this.updateState = mobx.action(() => {
+            this.gameState.counter++;
         });
 
         // [PLAYER]
@@ -58,9 +63,7 @@ class GameState{
         // move
         if(this.keys.left.isDown){
             this.player.x--;
-            mobx.autorun(() => {
-                this.gameState.hit = true;
-            });
+            this.updateState();
         } else if(this.keys.right.isDown){
             this.player.x++;
         }
