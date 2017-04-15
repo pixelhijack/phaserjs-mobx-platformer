@@ -68,14 +68,14 @@ class GameState{
 
         // move
         if(this.keys.left.isDown){
-            this.player.x--;
+            this.player.body.velocity.x--;
             this.player.updateState({ life: this.player.spriteState.life - 1 });
         } else if(this.keys.right.isDown){
-            this.player.x++;
+            this.player.body.velocity.x++;
         }
 
         // collide
-        this.game.physics.arcade.collide(this.player, this.enemies, function(player, enemy){
+        this.game.physics.arcade.collide(this.player, this.enemy, function(player, enemy){
             console.log('collision!', arguments);
         });
     }
