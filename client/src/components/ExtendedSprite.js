@@ -1,5 +1,5 @@
 class ExtendedSprite extends Phaser.Sprite{
-    constructor(game, x, y, sprite, gameState){
+    constructor(game, x, y, sprite){
         super(game, x, y, sprite)
         this.game = game;
         this.game.add.existing(this);
@@ -8,6 +8,8 @@ class ExtendedSprite extends Phaser.Sprite{
         this.body.collideWorldBounds = true;
         this.checkWorldBounds = true;
         this.body.gravity.y = 500;
+
+        const gameState = this.game.state.states[this.game.state.current].gameState;
         mobx.observe(gameState, change => {
             console.log('change', change, gameState);
         });

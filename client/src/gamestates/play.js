@@ -50,10 +50,10 @@ class GameState{
         this.updateState({ initialised: true });
 
         // [PLAYER]
-        this.player = new ExtendedSprite(this.game, 200, 200, 'player', this.gameState);
+        this.player = new ExtendedSprite(this.game, 200, 200, 'player');
 
         // [ENEMY]
-        this.enemy = new ExtendedSprite(this.game, 400, 200, 'dino', this.gameState);
+        this.enemy = new ExtendedSprite(this.game, 400, 200, 'dino');
         this.enemy.body.velocity.x = Math.random() * (-10) - 10;
 
         this.game.camera.follow(this.player);
