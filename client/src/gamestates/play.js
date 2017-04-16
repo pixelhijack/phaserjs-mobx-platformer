@@ -50,7 +50,10 @@ class GameState{
         this.updateState({ initialised: true });
 
         // [PLAYER]
-        this.player = new ExtendedSprite(this.game, 200, 200, 'player');
+        this.player = new ExtendedSprite(this.game, 200, 200, 'player', {
+            acceleration: 10,
+            maxSpeed: 200
+        });
 
         // [ENEMY]
         this.enemy = new ExtendedSprite(this.game, 400, 200, 'dino');
@@ -69,11 +72,8 @@ class GameState{
             "Life: " + this.player.spriteState.life,
             { font: "24px Courier", fill: "#000", align: "center" }
         );
-        this.setMenu = life => {
-            this.menu.setText("Life: " + life);
-        };
         mobx.observe(this.player.spriteState, change => {
-            this.setMenu(this.player.spriteState.life);
+            this.menu.setText("Life: " + this.player.spriteState.life);
         });
     }
     update(){
@@ -90,20 +90,32 @@ class GameState{
                 life: this.player.spriteState.life - 1,
                 stun: this.game.time.now + 1000
             });
+            this.player.hurt(enemy.body.touching);
         });
     }
     onKeyPress(){
+        // stun => blocked
         if(this.player.spriteState.stun > this.game.time.now){
             return;
         }
+
+        // move left / right
         if(this.keys.left.isDown){
-            this.player.body.velocity.x--;
+            this.player.moveLeft();
         } else if(this.keys.right.isDown){
-            this.player.body.velocity.x++;
+            this.player.moveRight();
+        } else {
+            this.player.stop();
         }
 
+        // jump
         if(this.keys.up.isDown){
             this.player.jump();
+        }
+
+        // hit
+        if(this.keys.space.isDown){
+
         }
     }
 }
