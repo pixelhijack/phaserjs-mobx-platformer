@@ -77,11 +77,25 @@ class GameState{
         });
     }
     update(){
-        console.log('[PHASER][Component][Update]');
+        //console.log('[PHASER][Component][Update]');
         // fps
         this.game.debug.text(this.game.time.fps, 5, 20);
 
         // move
+        this.onKeyPress();
+
+        // collide
+        this.game.physics.arcade.overlap(this.player, this.enemy, (player, enemy) => {
+            this.player.updateState({
+                life: this.player.spriteState.life - 1,
+                stun: this.game.time.now + 1000
+            });
+        });
+    }
+    onKeyPress(){
+        if(this.player.spriteState.stun > this.game.time.now){
+            return;
+        }
         if(this.keys.left.isDown){
             this.player.body.velocity.x--;
         } else if(this.keys.right.isDown){
@@ -91,14 +105,7 @@ class GameState{
         if(this.keys.up.isDown){
             this.player.jump();
         }
-
-        // collide
-        this.game.physics.arcade.overlap(this.player, this.enemy, (player, enemy) => {
-            console.log('collision!', arguments);
-            this.player.updateState({ life: this.player.spriteState.life - 1 });
-        });
     }
 }
-
 
 module.exports = GameState;
