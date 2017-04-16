@@ -2,7 +2,7 @@ class ExtendedSprite extends Phaser.Sprite{
     constructor(game, x, y, sprite, props){
         super(game, x, y, sprite)
         this.game = game;
-        this.props = props;
+        this.props = props || { animations: [] };
         this.game.add.existing(this);
         this.game.physics.enable(this, Phaser.Physics.ARCADE);
         this.anchor.setTo(0.5, 0.5);
@@ -10,16 +10,28 @@ class ExtendedSprite extends Phaser.Sprite{
         this.checkWorldBounds = true;
         this.body.gravity.y = 500;
 
+        this.props.animations.forEach(animation => {
+            this.animations.add(
+                animation.name,
+                animation.frames.map(frame => frame.toString()),
+                animation.fps,
+                animation.loop
+            );
+        });
+
         const gameState = this.game.state.states[this.game.state.current].gameState;
+
         mobx.observe(gameState, change => {
             console.log('change', change, gameState);
         });
+
         this.spriteState = mobx.observable({
             life: 10,
             stun: 0,
             hit: 0,
             nohit: 0
         });
+
         this.updateState = mobx.action((change) => {
             this.spriteState = Object.assign(this.spriteState, change);
             console.log('[%s] life: ', sprite, this.spriteState.life);
