@@ -86,11 +86,13 @@ class GameState{
 
         // collide
         this.game.physics.arcade.overlap(this.player, this.enemy, (player, enemy) => {
-            this.player.updateState({
-                life: this.player.spriteState.life - 1,
-                stun: this.game.time.now + 1000
-            });
-            this.player.hurt(enemy.body.touching);
+            if(!this.player.isHitting){
+                this.player.updateState({
+                    life: this.player.spriteState.life - 1,
+                    stun: this.game.time.now + 1000
+                });
+                this.player.hurt(enemy.body.touching);
+            }
         });
     }
     onKeyPress(){
@@ -115,7 +117,9 @@ class GameState{
 
         // hit
         if(this.keys.space.isDown){
-
+            if(this.player.spriteState.nohit < this.game.time.now){
+                this.player.hit();
+            }
         }
     }
 }

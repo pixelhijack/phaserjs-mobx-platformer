@@ -16,7 +16,9 @@ class ExtendedSprite extends Phaser.Sprite{
         });
         this.spriteState = mobx.observable({
             life: 10,
-            stun: 0
+            stun: 0,
+            hit: 0,
+            nohit: 0
         });
         this.updateState = mobx.action((change) => {
             this.spriteState = Object.assign(this.spriteState, change);
@@ -57,7 +59,17 @@ class ExtendedSprite extends Phaser.Sprite{
     }
 
     hit(){
+        const hitUntil = this.game.time.now + 200,
+            breakUntil = this.game.time.now + 300;
+        console.log('Now %s Hit %s Break %s', this.game.time.now, hitUntil, breakUntil);
+        this.updateState({
+            hit: hitUntil,
+            nohit: breakUntil
+        });
+    }
 
+    get isHitting(){
+        return this.spriteState.hit > this.game.time.now;
     }
 
     hurt(direction){
