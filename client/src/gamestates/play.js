@@ -86,10 +86,10 @@ class GameState{
 
         // collide
         this.game.physics.arcade.overlap(this.player, this.enemy, (player, enemy) => {
-            if(!this.player.isHitting){
+            if(!this.player.isHitting && !this.player.isStunned){
                 this.player.updateState({
                     life: this.player.spriteState.life - 1,
-                    stun: this.game.time.now + 1000
+                    stun: this.game.time.now + 1500
                 });
                 this.player.hurt(enemy.body.touching);
             }
@@ -97,7 +97,7 @@ class GameState{
     }
     onKeyPress(){
         // stun => blocked
-        if(this.player.spriteState.stun > this.game.time.now){
+        if(this.player.isStunned){
             return;
         }
 

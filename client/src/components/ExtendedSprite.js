@@ -26,6 +26,14 @@ class ExtendedSprite extends Phaser.Sprite{
         });
     }
 
+    get isHitting(){
+        return this.spriteState.hit > this.game.time.now;
+    }
+
+    get isStunned(){
+        return this.spriteState.stun > this.game.time.now;
+    }
+
     moveLeft(){
         this.scale.x = -1;
         if(this.body.velocity.x > -this.props.maxSpeed){
@@ -66,10 +74,6 @@ class ExtendedSprite extends Phaser.Sprite{
             hit: hitUntil,
             nohit: breakUntil
         });
-    }
-
-    get isHitting(){
-        return this.spriteState.hit > this.game.time.now;
     }
 
     hurt(direction){
