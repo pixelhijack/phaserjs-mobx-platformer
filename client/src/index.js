@@ -1,5 +1,5 @@
 import gameConfig from './gameconfig.js';
-import Play from './gamestates/play.js';
+import Play from './gamestates/play/index.js';
 
 // instantiate a Phaser.Game
 const PLATFORMER = new Phaser.Game(
