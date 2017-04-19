@@ -1,11 +1,11 @@
 function preload(){
     console.log('[PHASER][Component][Preload]');
-    this.game.load.image('player', 'man.png');
-    this.game.load.image('dino', 'dino.png');
+
+    // assets to load relative to /assets/.. 
     this.game.load.atlas(
         'pre2atlas',
-        'pre2atlas.png',
-        'pre2atlas.json',
+        'spritesheets/pre2atlas.png',
+        'spritesheets/pre2atlas.json',
         Phaser.Loader.TEXTURE_ATLAS_JSON_HASH
     );
 };

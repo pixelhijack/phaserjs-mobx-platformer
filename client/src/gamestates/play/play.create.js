@@ -50,7 +50,20 @@ function create(){
     });
 
     // [ENEMY]
-    this.enemy = new AI(this.game, 400, 200, 'dino');
+    this.enemy = new AI(this.game, 400, 200, 'pre2atlas', {
+      mass: 1.5,
+      jumping: 300,
+      maxSpeed: 50,
+      acceleration: 5, 
+      animations: [
+        { name: 'idle', frames: [360,360,360,360,360,360,360,367], fps: 5, loop: true },
+        { name: 'move', frames: [360,361,364,367,369], fps: 10, loop: true },
+        { name: 'jump', frames: [360,361,364,367,369], fps: 10, loop: true },
+        { name: 'fall', frames: [369], fps: 10, loop: true },
+        { name: 'die', frames: [371], fps: 10, loop: true },
+        { name: 'spawn', frames: [360,361,364,367], fps: 10, loop: true }
+      ]
+    });
     this.enemy.body.velocity.x = Math.random() * (-10) - 10;
 
     this.game.camera.follow(this.player);

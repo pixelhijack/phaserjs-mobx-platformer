@@ -3,6 +3,8 @@ function update(){
     // fps
     this.game.debug.text(this.game.time.fps, 5, 20);
 
+    this.enemy.animations.play('move');
+
     // move
     onKeyPress.call(this);
 
