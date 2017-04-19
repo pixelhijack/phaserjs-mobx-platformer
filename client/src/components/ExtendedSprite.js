@@ -1,6 +1,6 @@
 class ExtendedSprite extends Phaser.Sprite{
     constructor(game, x, y, sprite, props){
-        super(game, x, y, sprite)
+        super(game, x, y, sprite);
         this.game = game;
         this.props = props || { animations: [] };
         this.game.add.existing(this);
@@ -21,20 +21,12 @@ class ExtendedSprite extends Phaser.Sprite{
 
         const gameState = this.game.state.states[this.game.state.current].gameState;
 
-        mobx.observe(gameState, change => {
+        mobx.observe(gameState, (change) => {
             console.log('change', change, gameState);
-        });
-
-        this.spriteState = mobx.observable({
-            life: 10,
-            stun: 0,
-            hit: 0,
-            nohit: 0
         });
 
         this.updateState = mobx.action((change) => {
             this.spriteState = Object.assign(this.spriteState, change);
-            console.log('[%s] life: ', sprite, this.spriteState.life);
         });
     }
 
@@ -79,8 +71,8 @@ class ExtendedSprite extends Phaser.Sprite{
     }
 
     hit(){
-        const hitUntil = this.game.time.now + 200,
-            breakUntil = this.game.time.now + 300;
+        const hitUntil = this.game.time.now + 900,
+            breakUntil = this.game.time.now + 1000;
         console.log('Now %s Hit %s Break %s', this.game.time.now, hitUntil, breakUntil);
         this.updateState({
             hit: hitUntil,

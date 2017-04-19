@@ -1,4 +1,5 @@
-import ExtendedSprite from '../components/ExtendedSprite';
+import AI from '../components/AI';
+import Human from '../components/Human';
 
 class GameState{
     constructor(gameConfig) {
@@ -56,7 +57,7 @@ class GameState{
         this.updateState({ initialised: true });
 
         // [PLAYER]
-        this.player = new ExtendedSprite(this.game, 200, 200, 'pre2atlas', {
+        this.player = new Human(this.game, 200, 200, 'pre2atlas', {
             acceleration: 10,
             maxSpeed: 200,
             animations: [
@@ -73,7 +74,7 @@ class GameState{
         });
 
         // [ENEMY]
-        this.enemy = new ExtendedSprite(this.game, 400, 200, 'dino');
+        this.enemy = new AI(this.game, 400, 200, 'dino');
         this.enemy.body.velocity.x = Math.random() * (-10) - 10;
 
         this.game.camera.follow(this.player);
@@ -139,7 +140,7 @@ class GameState{
 
         // hit
         if(this.keys.space.isDown){
-            if(this.player.spriteState.nohit < this.game.time.now){
+            if(this.player.spriteState.nohit < this.game.time.now && this.player.spriteState.hit < this.game.time.now){
                 this.player.hit();
                 this.player.animations.play('hit');
             }
