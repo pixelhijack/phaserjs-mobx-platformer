@@ -1,5 +1,6 @@
-function init(configs){
-    console.log('[PHASER][Component][Init]', configs);
+function init(levelConfig){
+    console.log('[PHASER][Component][Init]', levelConfig);
+    this.levelConfig = levelConfig;
 };
 
 export default init;

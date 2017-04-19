@@ -12,7 +12,10 @@ const PLATFORMER = new Phaser.Game(
 // register gamestates (will be instantiated w/ this.game as 1st param, pass gameConfig as 2nd)
 PLATFORMER.state.add('Play', Play.bind(null, gameConfig));
 
-// kick off first gamestate: Menu
-PLATFORMER.state.start('Play', true, true, {
-    initialState: 'some initial state'
+fetch('/level/1', {
+    method: 'GET'
+}).then(function(response) {
+    return response.json();
+}).then(function(levelConfig) {
+    PLATFORMER.state.start('Play', true, true, levelConfig);
 });
