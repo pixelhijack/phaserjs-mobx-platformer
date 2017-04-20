@@ -10,12 +10,12 @@ function create(){
     this.game.world.setBounds(
         0,
         0,
-        this.gameConfig.width,
-        this.gameConfig.height
+        this.globalConfig.width * this.globalConfig.blocks,
+        this.globalConfig.height
     );
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
-    this.game.stage.backgroundColor = '#fff';
+    this.levelLoader.createBackground('backgroundLayer');
 
     this.gameState = mobx.observable({
         initialised: false,
@@ -54,7 +54,7 @@ function create(){
       mass: 1.5,
       jumping: 300,
       maxSpeed: 50,
-      acceleration: 5, 
+      acceleration: 5,
       animations: [
         { name: 'idle', frames: [360,360,360,360,360,360,360,367], fps: 5, loop: true },
         { name: 'move', frames: [360,361,364,367,369], fps: 10, loop: true },
