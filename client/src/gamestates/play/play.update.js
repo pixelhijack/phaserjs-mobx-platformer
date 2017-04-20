@@ -9,6 +9,8 @@ function update(){
     onKeyPress.call(this);
 
     // collide
+    this.game.physics.arcade.collide(this.player, this.level.collisionLayer);
+
     this.game.physics.arcade.overlap(this.player, this.enemy, (player, enemy) => {
         if(!this.player.isHitting && !this.player.isStunned){
             this.player.updateState({

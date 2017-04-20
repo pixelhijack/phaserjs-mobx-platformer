@@ -15,7 +15,18 @@ function create(){
     );
 
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
     this.levelLoader.createBackground('backgroundLayer');
+    this.levelLoader.createTiles(
+        this.levelConfig.tilemap, 
+        this.levelConfig.tileset,
+        this.levelConfig.tilesetImage
+    );
+    this.levelLoader.createLayers(this.levelConfig.layers);
+
+    // [SET LEVEL] fix background, resize
+    this.level.backgroundLayer.fixedToCamera = this.levelConfig.fixedBackground;
+    this.level.groundLayer.resizeWorld();
 
     this.gameState = mobx.observable({
         initialised: false,
