@@ -11,6 +11,19 @@ class AI extends ExtendedSprite {
             nohit: 0
         });
     }
+    turnIfBlocked(){
+        if(this.body.blocked.left || this.body.blocked.right){
+            this.scale.x *= -1;
+        }
+    }
+    turn(){
+        this.scale.x *= -1;
+    }
+    update(){
+        this.animations.play('move');
+        this.turnIfBlocked();
+        this.move();
+    }
 }
 
 export default AI;

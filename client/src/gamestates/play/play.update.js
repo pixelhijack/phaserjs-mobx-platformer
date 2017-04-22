@@ -3,14 +3,12 @@ function update(){
     // fps
     this.game.debug.text(this.game.time.fps, 5, 20);
 
-    this.enemy.animations.play('move');
-
     // collide
     this.game.physics.arcade.collide(this.player, this.level.collisionLayer);
 
     this.game.physics.arcade.collide(this.enemies, this.level.collisionLayer);
 
-    this.game.physics.arcade.overlap(this.player, this.enemy, (player, enemy) => {
+    this.game.physics.arcade.overlap(this.player, this.enemies, (player, enemy) => {
         if(!this.player.isHitting && !this.player.isStunned){
             this.player.updateState({
                 life: this.player.spriteState.life - 1,

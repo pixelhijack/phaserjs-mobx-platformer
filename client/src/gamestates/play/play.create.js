@@ -52,16 +52,7 @@ function create(){
         this.creatureConfig.man
     );
 
-    // [ENEMY]
-    this.enemy = new AI(
-        this.game,
-        this.levelConfig.entryPoint.x + 50, 
-        this.levelConfig.entryPoint.y,
-        this.globalConfig.textureAtlasName,
-        this.creatureConfig.dino
-    );
-    this.enemy.body.velocity.x = Math.random() * (-10) - 10;
-
+    // [ENEMIES]
     this.enemies = new Phaser.Group(this.game);
     this.levelConfig.enemies.forEach(this.creatureFactory.create);
 
@@ -73,11 +64,12 @@ function create(){
 
     // score text
     this.menu = this.game.add.text(
-        150,
+        this.globalConfig.width - 120,
         0,
         "Life: " + this.player.spriteState.life,
-        { font: "24px Courier", fill: "#000", align: "center" }
+        { font: "24px Courier", fill: "#fff", align: "center" }
     );
+    this.menu.fixedToCamera = true;
     mobx.observe(this.player.spriteState, change => {
         this.menu.setText("Life: " + this.player.spriteState.life);
     });

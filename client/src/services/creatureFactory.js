@@ -25,9 +25,6 @@ function creatureFactory() {
                 constructor(game, x, y, sprite, props){
             	    super(game, x, y, sprite, props);
             	}
-                update(){
-                    this.animations.play('move');
-                }
             }
         }
     }
