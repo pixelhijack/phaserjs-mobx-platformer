@@ -1,5 +1,4 @@
 function levelLoader() {
-
     return {
         createBackground: (layerName) => {
             this.level.backgroundLayer = this.game.add.tileSprite(

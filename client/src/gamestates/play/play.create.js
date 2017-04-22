@@ -1,6 +1,5 @@
 import Human from '../../components/Human';
 import AI from '../../components/AI';
-import creatureConfig from '../../components/creatureconfig';
 
 function create(){
     console.log('[PHASER][Component][Create]');
@@ -45,11 +44,26 @@ function create(){
     this.updateState({ initialised: true });
 
     // [PLAYER]
-    this.player = new Human(this.game, 200, 200, 'pre2atlas', creatureConfig.man);
+    this.player = new Human(
+        this.game,
+        this.levelConfig.entryPoint.x,
+        this.levelConfig.entryPoint.y,
+        this.globalConfig.textureAtlasName,
+        this.creatureConfig.man
+    );
 
     // [ENEMY]
-    this.enemy = new AI(this.game, 400, 200, 'pre2atlas', creatureConfig.dino);
+    this.enemy = new AI(
+        this.game,
+        this.levelConfig.entryPoint.x + 50, 
+        this.levelConfig.entryPoint.y,
+        this.globalConfig.textureAtlasName,
+        this.creatureConfig.dino
+    );
     this.enemy.body.velocity.x = Math.random() * (-10) - 10;
+
+    this.enemies = new Phaser.Group(this.game);
+    this.levelConfig.enemies.forEach(this.creatureFactory.create);
 
     this.game.camera.follow(this.player);
 
