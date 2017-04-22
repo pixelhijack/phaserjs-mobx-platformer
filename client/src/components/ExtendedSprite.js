@@ -9,7 +9,7 @@ class ExtendedSprite extends Phaser.Sprite{
         this.body.collideWorldBounds = true;
         this.checkWorldBounds = true;
         this.outOfBoundsKill = true;
-        this.body.gravity.y = 500;
+        this.body.gravity.y = this.props.gravity;
 
         this.props.animations.forEach(animation => {
             this.animations.add(
