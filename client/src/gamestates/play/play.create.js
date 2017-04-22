@@ -18,7 +18,7 @@ function create(){
 
     this.levelLoader.createBackground('backgroundLayer');
     this.levelLoader.createTiles(
-        this.levelConfig.tilemap, 
+        this.levelConfig.tilemap,
         this.levelConfig.tileset,
         this.levelConfig.tilesetImage
     );

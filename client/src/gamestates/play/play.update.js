@@ -5,9 +5,6 @@ function update(){
 
     this.enemy.animations.play('move');
 
-    // move
-    onKeyPress.call(this);
-
     // collide
     this.game.physics.arcade.collide(this.player, this.level.collisionLayer);
 
@@ -20,6 +17,9 @@ function update(){
             this.player.hurt(enemy.body.touching);
         }
     });
+
+    // move
+    onKeyPress.call(this);
 }
 
 function onKeyPress(){
