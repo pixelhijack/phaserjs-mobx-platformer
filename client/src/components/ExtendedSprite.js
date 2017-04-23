@@ -10,6 +10,10 @@ class ExtendedSprite extends Phaser.Sprite{
         this.checkWorldBounds = true;
         this.outOfBoundsKill = true;
         this.body.gravity.y = this.props.gravity;
+        this._debugText = this.addChild(
+            this.game.add.text(20, -20, 'debug', { font: "12px Courier", fill: "#ffffff" })
+        );
+        this._debugText.visible = false;
 
         this.props.animations.forEach(animation => {
             this.animations.add(
@@ -37,6 +41,14 @@ class ExtendedSprite extends Phaser.Sprite{
 
     get isStunned(){
         return this.spriteState.stun > this.game.time.now;
+    }
+
+    get facingRight(){
+        return this.scale.x > 0;
+    }
+
+    get facingLeft(){
+        return this.scale.x < 0;
     }
 
     moveLeft(){
@@ -89,6 +101,12 @@ class ExtendedSprite extends Phaser.Sprite{
         if(direction && direction.right){
             this.body.velocity.x += 100 || this.props.maxSpeed;
         }
+    }
+
+    debug(text){
+       this._debugText.visible = true;
+       this._debugText.scale.x = this.scale.x;
+       this._debugText.setText(text.toString() || '');
     }
 
     update(){

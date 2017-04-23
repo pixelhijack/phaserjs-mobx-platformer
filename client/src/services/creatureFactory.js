@@ -24,20 +24,22 @@ function creatureFactory() {
             creatures[creature] = class creature extends AI {
                 constructor(game, x, y, sprite, props){
             	    super(game, x, y, sprite, props);
+                    this.id = `${props.type}-${x}-${y}`;
             	}
             }
         }
     }
 
     return {
-        create: (creatureConfig) => {
-            const enemy = new creatures[creatureConfig.type](
+        create: (levelConfig) => {
+            const enemy = new creatures[levelConfig.type](
                 this.game,
-                creatureConfig.origin.x,
-                creatureConfig.origin.y,
+                levelConfig.origin.x,
+                levelConfig.origin.y,
                 this.globalConfig.textureAtlasName,
-                this.creatureConfig[creatureConfig.type]
+                this.creatureConfig[levelConfig.type]
             );
+            enemy.setBounds(levelConfig.boundTo);
             this.enemies.add(enemy);
         }
     };

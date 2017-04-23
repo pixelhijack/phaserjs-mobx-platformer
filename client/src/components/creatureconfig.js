@@ -19,16 +19,14 @@ var creatureConfigs = {
       'stop': 200,
       'idle': 10
     },
-    boundTo : {
-      x1: 1000,
-      x2: 1200
-    },
+    boundTo : {},
     correctedAnchor: {
       x: 0.5,
       y: 0.5
     }
   },
   man: {
+    type: 'man',
     maxSpeed: 200,
     lives: 8,
     lifespan: Infinity,
@@ -49,6 +47,7 @@ var creatureConfigs = {
     }
   },
   dino: {
+    type: 'dino',
     mass: 1.5,
     jumping: 300,
     maxSpeed: 50,
@@ -63,6 +62,7 @@ var creatureConfigs = {
     ]
   },
   bear: {
+    type: 'bear',
     mass: 1.2,
     maxSpeed: 75,
     jumping: 0,
@@ -81,6 +81,7 @@ var creatureConfigs = {
     animations: []
   },
   tiger: {
+    type: 'tiger',
     mass: 1.5,
     jumping: 300,
     maxSpeed: 50,
@@ -95,6 +96,7 @@ var creatureConfigs = {
     ]
   },
   ptero: {
+    type: 'ptero',
     mass: 0.5,
     gravity: 0,
     bounce: 0.1,
@@ -112,6 +114,7 @@ var creatureConfigs = {
     ]
   },
   dragonfly: {
+    type: 'dragonfly',
     mass: 0.5,
     gravity: 0,
     bounce: 0.1,
@@ -128,6 +131,7 @@ var creatureConfigs = {
     ]
   },
   bat: {
+    type: 'bat',
     mass: 0.5,
     gravity: 0,
     bounce: 0.1,
@@ -143,6 +147,7 @@ var creatureConfigs = {
     ]
   },
   spider: {
+    type: 'spider',
     mass: 0.3,
     jumping: 0,
     collide: true,
@@ -160,6 +165,7 @@ var creatureConfigs = {
     ]
   },
   native: {
+    type: 'native',
     maxSpeed: 100,
     acceleration: 20,
     jumping: 0,
@@ -171,6 +177,7 @@ var creatureConfigs = {
     ]
   },
   parrot: {
+    type: 'parrot',
     mass: 0.5,
     gravity: 0,
     bounce: 0.1,
@@ -186,6 +193,7 @@ var creatureConfigs = {
     ]
   },
   insect: {
+    type: 'insect',
     mass: 1,
     collide: true,
     bounce: 1.5,
@@ -201,6 +209,7 @@ var creatureConfigs = {
     ]
   },
   bug: {
+    type: 'bug',
     mass: 1,
     collide: true,
     bounce: 1.5,
@@ -216,6 +225,7 @@ var creatureConfigs = {
     ]
   },
   frog: {
+    type: 'frog',
     mass: 1,
     collide: true,
     bounce: 1.5,
@@ -231,6 +241,7 @@ var creatureConfigs = {
     ]
   },
   turtle: {
+    type: 'turtle',
     mass: 2,
     jumping: 0,
     collide: true,
@@ -245,6 +256,7 @@ var creatureConfigs = {
     ]
   },
   jelly: {
+    type: 'jelly',
     mass: 2,
     jumping: 0,
     collide: true,
@@ -259,6 +271,7 @@ var creatureConfigs = {
     ]
   },
   gorilla: {
+    type: 'gorilla',
     mass: 5,
     jumping: 300,
     maxSpeed: 0,
