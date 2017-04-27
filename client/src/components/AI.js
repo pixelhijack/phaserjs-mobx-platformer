@@ -79,10 +79,11 @@ class AI extends ExtendedSprite {
         }
     }
     update(){
-        //this.debug(this.id);
+        const debugBounds = this.id+'\n'+ (this.boundTo && Object.keys(this.boundTo).length && this.boundTo.x) +'\n'+ (this.x | 0);
+        this.debug(debugBounds);
         this.animations.play('move');
         this.checkBounds();
-        this.turnIfBlocked();
+        //this.turnIfBlocked();
         this.move();
     }
 }

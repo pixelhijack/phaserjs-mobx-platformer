@@ -5,7 +5,7 @@ class ExtendedSprite extends Phaser.Sprite{
         this.props = props || { animations: [] };
         this.game.add.existing(this);
         this.game.physics.enable(this, Phaser.Physics.ARCADE);
-        this.anchor.setTo(0.5, 0.5);
+        this.anchor.setTo(0.5, 1);
         this.body.collideWorldBounds = true;
         this.checkWorldBounds = true;
         this.outOfBoundsKill = true;

@@ -9,6 +9,9 @@ function update(){
     this.game.physics.arcade.collide(this.enemies, this.level.collisionLayer);
 
     this.game.physics.arcade.overlap(this.player, this.enemies, (player, enemy) => {
+        if(this.player.body.touching.down && enemy.body.touching.up){
+            return;
+        }
         if(!this.player.isHitting && !this.player.isStunned){
             this.player.updateState({
                 life: this.player.spriteState.life - 1,
