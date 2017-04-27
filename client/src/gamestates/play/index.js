@@ -10,7 +10,7 @@ import preload from './play.preload';
 import create from './play.create';
 import update from './play.update';
 
-class GameState {
+class Play {
     constructor(globalConfig) {
         this.keys = undefined;
         this.player = undefined;
@@ -29,9 +29,9 @@ class GameState {
     }
 }
 
-GameState.prototype.init = init;
-GameState.prototype.preload = preload;
-GameState.prototype.create = create;
-GameState.prototype.update = update;
+Play.prototype.init = init;
+Play.prototype.preload = preload;
+Play.prototype.create = create;
+Play.prototype.update = update;
 
-module.exports = GameState;
+module.exports = Play;
