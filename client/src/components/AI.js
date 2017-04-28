@@ -4,6 +4,8 @@ class AI extends ExtendedSprite {
     constructor(game, x, y, sprite, props){
         super(game, x, y, sprite, props);
 
+        this.id = `${props.type}-${x}-${y}`;
+
         this.spriteState = mobx.observable({
             life: 10,
             stun: 0,
