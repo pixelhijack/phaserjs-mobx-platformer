@@ -14,6 +14,8 @@ import spider from '../components/creatures/spider.js';
 import tiger from '../components/creatures/tiger.js';
 import turtle from '../components/creatures/turtle.js';
 
+import AI from '../components/AI';
+
 function creatureFactory() {
     const Creature = {
         bat: bat,
@@ -35,12 +37,13 @@ function creatureFactory() {
 
     return {
         create: (levelConfig) => {
-            const enemy = new Creature[levelConfig.type](
+            const enemy = new AI(
                 this.game,
                 levelConfig.origin.x,
                 levelConfig.origin.y,
                 this.globalConfig.textureAtlasName,
-                this.creatureConfig[levelConfig.type]
+                this.creatureConfig[levelConfig.type],
+                this.creatureConfig[levelConfig.type].behaviours
             );
             enemy.setBounds(levelConfig.boundTo);
             this.enemies.add(enemy);

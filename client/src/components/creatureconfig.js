@@ -20,10 +20,11 @@ var creatureConfigs = {
       'idle': 10
     },
     boundTo : {},
-    correctedAnchor: {
-      x: 0.5,
-      y: 0.5
-    }
+    behaviours: [
+        { action: 'turnIfBlocked' },
+        { action: 'move' },
+        { action: 'checkBounds' }
+    ]
   },
   man: {
     type: 'man',
@@ -40,11 +41,7 @@ var creatureConfigs = {
       { name: 'stun', frames: [19], fps: 10, loop: true },
       { name: 'die', frames: [19], fps: 10, loop: false },
       { name: 'spawn', frames: [11,'03','05',14,20], fps: 10, loop: false }
-    ],
-    correctedAnchor: {
-      x: 0.5,
-      y: 0.8
-    }
+    ]
   },
   dino: {
     type: 'dino',
@@ -52,6 +49,12 @@ var creatureConfigs = {
     jumping: 300,
     maxSpeed: 50,
     acceleration: 5,
+    behaviours: [
+        { action: 'turnIfBlocked' },
+        { action: 'move' },
+        { action: 'checkBounds' },
+        { action: 'when', params: { probability: 0.01, action: 'jump' } }
+    ],
     animations: [
       { name: 'idle', frames: [360,360,360,360,360,360,360,367], fps: 5, loop: true },
       { name: 'move', frames: [360,361,364,367,369], fps: 10, loop: true },

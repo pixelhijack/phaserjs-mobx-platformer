@@ -1,10 +1,12 @@
 import ExtendedSprite from './ExtendedSprite';
 
 class AI extends ExtendedSprite {
-    constructor(game, x, y, sprite, props){
+    constructor(game, x, y, sprite, props, behaviours){
         super(game, x, y, sprite, props);
 
         this.id = `${props.type}-${x}-${y}`;
+
+        this.behaviours = behaviours;
 
         this.spriteState = mobx.observable({
             life: 10,
@@ -80,13 +82,18 @@ class AI extends ExtendedSprite {
                 this.turn();
         }
     }
+    when(params) {
+		if(Math.random() < params.probability){
+			this[params.action] && this[params.action].call(this);
+		}
+	}
     update(){
         //const debugBounds = this.id+'\n'+ (this.boundTo && Object.keys(this.boundTo).length && this.boundTo.x) +'\n'+ (this.x | 0);
         //this.debug(debugBounds);
         this.animations.play('move');
-        this.checkBounds();
-        //this.turnIfBlocked();
-        this.move();
+        this.behaviours.forEach((behaviour) => {
+            this[behaviour.action] && this[behaviour.action].call(this, behaviour.params);
+        });
     }
 }
 
