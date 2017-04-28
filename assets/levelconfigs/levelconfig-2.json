@@ -82,10 +82,7 @@
 			"x": 513,
 			"y": 225
 		},
-		"boundTo": {
-			"x1": 0,
-			"x2": 0
-		}
+		"boundTo": {}
 	}, {
 		"type": "spider",
 		"number": 1,
@@ -95,10 +92,7 @@
 			"x": 1,
 			"y": 1
 		},
-		"boundTo": {
-			"x1": 0,
-			"x2": null
-		}
+		"boundTo": {}
 	}, {
 		"type": "spider",
 		"number": 1,
@@ -108,10 +102,7 @@
 			"x": 436,
 			"y": 555
 		},
-		"boundTo": {
-			"x1": 0,
-			"x2": null
-		}
+		"boundTo": {}
 	}, {
 		"type": "spider",
 		"number": 1,
@@ -123,10 +114,7 @@
 			"x": 611,
 			"y": 496
 		},
-		"boundTo": {
-			"x1": 0,
-			"x2": null
-		}
+		"boundTo": {}
 	}, {
 		"type": "dino",
 		"number": 1,
@@ -162,10 +150,7 @@
 			"x": 1130,
 			"y": 216
 		},
-		"boundTo": {
-			"x": null,
-			"y": null
-		}
+		"boundTo": {}
 	}, {
 		"type": "dragonfly",
 		"number": 1,

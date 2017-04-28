@@ -243,10 +243,7 @@
 			"x": 185,
 			"y": 135
 		},
-		"boundTo": {
-			"x1": 0,
-			"x2": null
-		}
+		"boundTo": {}
 	}, {
 		"type": "native",
 		"number": 1,

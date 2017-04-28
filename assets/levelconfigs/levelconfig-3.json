@@ -182,10 +182,7 @@
         "x": 999,
         "y": 584
       },
-      "boundTo": {
-        "x1": 0,
-        "x2": null
-      }
+      "boundTo": {}
     },
     {
       "type": "bug",
@@ -247,10 +244,7 @@
         "x": 585,
         "y": 973
       },
-      "boundTo": {
-        "x1": 0,
-        "x2": null
-      }
+      "boundTo": {}
     },
     {
       "type": "bear",
@@ -261,10 +255,7 @@
         "x": 870,
         "y": 1071
       },
-      "boundTo": {
-        "x1": 0,
-        "x2": null
-      }
+      "boundTo": {}
     },
     {
       "type": "frog",

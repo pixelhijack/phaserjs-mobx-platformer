@@ -203,6 +203,12 @@ var creatureConfigs = {
     jumping: 300,
     maxSpeed: 50,
     acceleration: 25,
+    behaviours: [
+        { action: 'turnIfBlocked' },
+        { action: 'move' },
+        { action: 'checkBounds' },
+        { action: 'when', params: { probability: 0.03, action: 'jump' } }
+    ],
     animations: [
       { name: 'idle', frames: [348,348,348,348,348,348,349], fps: 10, loop: true },
       { name: 'move', frames: [323,348,349], fps: 10, loop: true },
@@ -219,6 +225,12 @@ var creatureConfigs = {
     jumping: 300,
     maxSpeed: 50,
     acceleration: 25,
+    behaviours: [
+        { action: 'turnIfBlocked' },
+        { action: 'move' },
+        { action: 'checkBounds' },
+        { action: 'when', params: { probability: 0.02, action: 'jump' } }
+    ],
     animations: [
       { name: 'idle', frames: [344,344,344,344,344,344,344,344,346], fps: 10, loop: true },
       { name: 'move', frames: [344,346], fps: 10, loop: true },
@@ -235,6 +247,12 @@ var creatureConfigs = {
     jumping: 500,
     maxSpeed: 80,
     acceleration: 40,
+    behaviours: [
+        { action: 'turnIfBlocked' },
+        { action: 'move' },
+        { action: 'checkBounds' },
+        { action: 'when', params: { probability: 0.1, action: 'jump' } }
+    ],
     animations: [
       { name: 'idle', frames: [325], fps: 10, loop: true },
       { name: 'move', frames: [325,327,331,325], fps: 10, loop: false },

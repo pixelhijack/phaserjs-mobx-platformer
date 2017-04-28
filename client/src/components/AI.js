@@ -25,44 +25,46 @@ class AI extends ExtendedSprite {
         this.scale.x *= -1;
     }
     setBounds(boundTo){
-        if(boundTo){
-            if(boundTo.hasOwnProperty('x') &&
-                boundTo.hasOwnProperty('y')){
-                    this.boundTo = new Phaser.Point(
-                        boundTo.x,
-                        boundTo.y
-                    );
-            }
+        if(!boundTo || !Object.keys(boundTo).length){
+            this.boundTo = null;
+            return;
+        }
+        if(boundTo.hasOwnProperty('x') &&
+            boundTo.hasOwnProperty('y')){
+                this.boundTo = new Phaser.Point(
+                    boundTo.x,
+                    boundTo.y
+                );
+        }
 
-            // @Rectangle { x1, x2 }
-            if(boundTo.hasOwnProperty('x1') &&
-                boundTo.hasOwnProperty('x2') &&
-                !boundTo.hasOwnProperty('y1') &&
-                !boundTo.hasOwnProperty('y2')){
-                    this.boundTo = new Phaser.Rectangle(
-                        boundTo.x1,
-                        0,
-                        boundTo.x2 - boundTo.x1,
-                        this.game.height
-                    );
-            }
+        // @Rectangle { x1, x2 }
+        if(boundTo.hasOwnProperty('x1') &&
+            boundTo.hasOwnProperty('x2') &&
+            !boundTo.hasOwnProperty('y1') &&
+            !boundTo.hasOwnProperty('y2')){
+                this.boundTo = new Phaser.Rectangle(
+                    boundTo.x1,
+                    0,
+                    boundTo.x2 - boundTo.x1,
+                    this.game.height
+                );
+        }
 
-            // {x1, y1, x2, y2}
-            if(boundTo.hasOwnProperty('x1') &&
-                boundTo.hasOwnProperty('x2') &&
-                boundTo.hasOwnProperty('y1') &&
-                boundTo.hasOwnProperty('y2')){
-                    this.boundTo = new Phaser.Rectangle(
-                        boundTo.x1,
-                        boundTo.y1,
-                        boundTo.x2 - boundTo.x1,
-                        boundTo.y2 - boundTo.y1
-                    );
-            }
+        // {x1, y1, x2, y2}
+        if(boundTo.hasOwnProperty('x1') &&
+            boundTo.hasOwnProperty('x2') &&
+            boundTo.hasOwnProperty('y1') &&
+            boundTo.hasOwnProperty('y2')){
+                this.boundTo = new Phaser.Rectangle(
+                    boundTo.x1,
+                    boundTo.y1,
+                    boundTo.x2 - boundTo.x1,
+                    boundTo.y2 - boundTo.y1
+                );
         }
     }
     checkBounds(){
-        if(!this.boundTo || !Object.keys(this.boundTo).length){
+        if(!this.boundTo){
            return;
         }
 
@@ -88,8 +90,8 @@ class AI extends ExtendedSprite {
 		}
 	}
     update(){
-        //const debugBounds = this.id+'\n'+ (this.boundTo && Object.keys(this.boundTo).length && this.boundTo.x) +'\n'+ (this.x | 0);
-        //this.debug(debugBounds);
+        const debugBounds = this.id+'\n'+ (this.boundTo && Object.keys(this.boundTo).length && this.boundTo.x) +'\n'+ (this.x | 0);
+        this.debug(debugBounds);
         this.animations.play('move');
         this.behaviours.forEach((behaviour) => {
             this[behaviour.action] && this[behaviour.action].call(this, behaviour.params);
