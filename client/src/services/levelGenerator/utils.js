@@ -8,7 +8,7 @@ export const flatten = multidimensional => {
 export const applyMatrix = (big, small, x, y) => {
     for (let row = 0; row < small.length; row++) {
         for (let col = 0; col < small[row].length; col++) {
-            big[x + col][y + row] = small[row][col];
+            big[y + row][x + col] = small[row][col];
         }
     }
     return big;
@@ -39,17 +39,10 @@ export const layerToMatrix = layer => {
 
 export const checkIfAreaIsCovered = (matrix, x, y, width, height) => {
     let res = 0;
-    for (let row = x; row < x + width; row++) {
-        for (let col = y; col < y + height; col++) {
-            res += matrix[row][col];
+    for (let row = x; row <= x + width; row++) {
+        for (let col = y; col <= y + height; col++) {
+            res += matrix[col][row];
         }
     }
     return res === 0;
-};
-
-export const putMatrixAtPoint = (big, small, points) => {
-    points.forEach(point => {
-        applyMatrix(big, small, point[0], point[1])
-    });
-    return big;
 };

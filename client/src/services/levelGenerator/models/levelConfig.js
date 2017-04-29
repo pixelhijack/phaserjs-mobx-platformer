@@ -11,7 +11,7 @@ const levelConfig = {
 	"backgroundImage": "bg3seamless",
 	"backgroundImageExtension": ".jpg",
 	"backgroundKey": "background-2",
-	"width": 544,
+	"width": 546,
 	"height": 368,
 	"layers": {
 		"groundLayer": {
