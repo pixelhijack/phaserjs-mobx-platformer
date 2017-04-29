@@ -41,23 +41,32 @@ const islands = [
 ];
 const collisionTiles = [91, 130, 111, 92, 97, 98, 77, 78];
 
-var LevelBuilder = function(aLevelConfig){
-    let level = aLevelConfig;
-    let levelMatrix = [];
+var LevelBuilder = function(levelConfig){
+    var level = levelConfig;
     return {
-        createLayers(){
-            groundLayer.data = flatten(populateMatrix(layerToMatrix(groundLayer), islands, 10));
+        createLayers(tilesWidth, tilesHeight){
+            // 100: rare, 40: frequent
+            const density = 100,
+                retry = Math.floor((tilesWidth * tilesHeight) / density);
+            groundLayer.data = flatten(populateMatrix(createMatrix(tilesHeight, tilesWidth, 0), islands, retry));
             collisionLayer.data = getCollisionLayer(groundLayer.data, collisionTiles);
+
+            level.tiledJson.width = tilesWidth;
+            level.tiledJson.height = tilesHeight;
+
+            groundLayer.width = tilesWidth;
+            groundLayer.height = tilesHeight;
+            collisionLayer.width = tilesWidth;
+            collisionLayer.height = tilesHeight;
+
+            level.width = tilesWidth * 16;
+            level.height = tilesHeight * 16;
+
             level.tiledJson.layers = [
                 groundLayer,
                 collisionLayer,
                 deathLayer
             ];
-            return this;
-        },
-        setDimensions(width, height){
-            level.width = width;
-            level.height = height;
             return this;
         },
         build(){
