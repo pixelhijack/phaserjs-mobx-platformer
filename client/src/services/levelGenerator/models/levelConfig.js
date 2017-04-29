@@ -11,8 +11,8 @@ const levelConfig = {
 	"backgroundImage": "bg3seamless",
 	"backgroundImageExtension": ".jpg",
 	"backgroundKey": "background-2",
-	"width": 1120,
-	"height": 4800,
+	"width": 544,
+	"height": 368,
 	"layers": {
 		"groundLayer": {
 			"key": "ground-layer",
@@ -29,8 +29,8 @@ const levelConfig = {
 	},
 	"fixedBackground": true,
 	"entryPoint": {
-		"x": 20,
-		"y": 4677
+		"x": 40,
+		"y": 250
 	},
 	"portals": [],
 	"platforms": [],
