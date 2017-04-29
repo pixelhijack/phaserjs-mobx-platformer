@@ -1,4 +1,4 @@
-import levelGenerator from '../../services/levelGenerator';
+import levelGenerator from '../../services/levelGenerator/index';
 
 function init(levelConfig){
     console.log('[PHASER][Component][Init]', levelConfig);
