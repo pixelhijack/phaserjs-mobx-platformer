@@ -66,6 +66,7 @@ class ExtendedSprite extends Phaser.Sprite{
     }
 
     move(){
+        this.animations.play('move');
         if(this.scale.x === 1){
             this.moveRight();
         } else {
@@ -75,11 +76,13 @@ class ExtendedSprite extends Phaser.Sprite{
 
     stop(){
         this.body.velocity.x /= 1.1;
+        this.animations.play('stop');
     }
 
     jump(){
         if(this.body.touching.down || this.body.blocked.down){
             this.body.velocity.y -= 300;
+            this.animations.play('jump');
         }
     }
 
@@ -91,6 +94,7 @@ class ExtendedSprite extends Phaser.Sprite{
             hit: hitUntil,
             nohit: breakUntil
         });
+        this.animations.play('hit');
     }
 
     hurt(direction){
@@ -101,6 +105,7 @@ class ExtendedSprite extends Phaser.Sprite{
         if(direction && direction.right){
             this.body.velocity.x += 100 || this.props.maxSpeed;
         }
+        this.animations.play('hurt');
     }
 
     debug(text){
