@@ -33,7 +33,12 @@ const getCollisionLayer = (flatMatrix, collisionTiles) => {
     return matrix;
 };
 
-const island = [[0,0,0,0],[0,77,78,0],[0,91,92,0],[0,0,0,0]];
+const islands = [
+    [[0,0,0,0],[0,77,78,0],[0,91,92,0],[0,0,0,0]],
+    [[0, 0, 0, 0], [77, 111, 111, 78], [91, 130, 130, 92], [0, 0, 0, 0]],
+    [[0, 0, 0, 0, 0, 0, 0], [77, 111, 111, 142, 111, 142, 78], [91, 130, 130, 144, 130, 144, 92], [0, 0, 0, 0, 0, 0, 0]],
+    [[0, 0, 0, 0], [0, 18, 19, 16], [15, 79, 23, 52], [58, 93, 39, 34], [112, 113, 34, 83], [77, 111, 111, 78], [91, 130, 130, 92], [0, 0, 0, 0]]
+];
 const collisionTiles = [91, 130, 111, 92, 97, 98, 77, 78];
 
 var LevelBuilder = function(aLevelConfig){
@@ -41,7 +46,7 @@ var LevelBuilder = function(aLevelConfig){
     let levelMatrix = [];
     return {
         createLayers(){
-            groundLayer.data = flatten(populateMatrix(layerToMatrix(groundLayer), [island], 10));
+            groundLayer.data = flatten(populateMatrix(layerToMatrix(groundLayer), islands, 10));
             collisionLayer.data = getCollisionLayer(groundLayer.data, collisionTiles);
             level.tiledJson.layers = [
                 groundLayer,
