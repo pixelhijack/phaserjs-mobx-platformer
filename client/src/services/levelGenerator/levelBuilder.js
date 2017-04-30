@@ -16,6 +16,8 @@ import {
     snowball
 } from './models/islands';
 
+import backgrounds from './models/backgrounds';
+
 const populateMatrix = (aMatrix, items, retry) => {
     let matrix = aMatrix.slice(0);
     while(retry--){
@@ -78,6 +80,12 @@ var LevelBuilder = function(levelConfig){
                 collisionLayer,
                 deathLayer
             ];
+            return this;
+        },
+        randomBackground(){
+            const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)]
+            level.backgroundImage = randomBackground.backgroundImage;
+            level.backgroundImageExtension = randomBackground.backgroundImageExtension;
             return this;
         },
         build(){

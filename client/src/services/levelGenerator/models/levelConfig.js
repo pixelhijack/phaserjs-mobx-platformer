@@ -29,8 +29,8 @@ const levelConfig = {
 	},
 	"fixedBackground": true,
 	"entryPoint": {
-		"x": 40,
-		"y": 250
+		"x": 10,
+		"y": 10
 	},
 	"portals": [],
 	"platforms": [],
