@@ -52,7 +52,7 @@ const islands = [
     [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,98,99,243,100,105,97,64,97,97,64,97,64,97,98,99,100,104,104,105,0],[0,122,127,126,206,0,0,0,0,0,0,0,0,0,245,127,125,126,127,0,0],[0,0,2684354681,2684354591,0,0,0,0,0,0,0,0,0,0,230,216,230,230,216,0,0]],
     snowball
 ];
-const collisionTiles = [24,64,77,78,91,92,97,98,99,100,104,105,111,123,124,125,126,127,130,167,180,197,204,205,206,207,208,229,243];
+const collisionTiles = [24,64,77,78,91,92,97,98,99,100,104,105,111,123,124,125,126,127,130,167,180,195,197,204,205,206,207,208,229,243];
 
 var LevelBuilder = function(levelConfig){
     var level = levelConfig;
@@ -63,6 +63,7 @@ var LevelBuilder = function(levelConfig){
                 retry = Math.floor((tilesWidth * tilesHeight) / density);
             groundLayer.data = flatten(populateMatrix(createMatrix(tilesHeight, tilesWidth, 0), islands, retry));
             collisionLayer.data = getCollisionLayer(groundLayer.data, collisionTiles);
+            deathLayer.data = groundLayer.data.map(tile => 0);
 
             level.tiledJson.width = tilesWidth;
             level.tiledJson.height = tilesHeight;
@@ -74,6 +75,12 @@ var LevelBuilder = function(levelConfig){
 
             level.width = tilesWidth * 16;
             level.height = tilesHeight * 16;
+
+            do {
+                // 195 = spike
+                groundLayer.data[groundLayer.data.length - tilesWidth] = 195;
+                deathLayer.data[deathLayer.data.length - tilesWidth] = 195;
+            } while(tilesWidth--);
 
             level.tiledJson.layers = [
                 groundLayer,

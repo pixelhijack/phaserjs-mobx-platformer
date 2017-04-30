@@ -8,6 +8,12 @@ function update(){
 
     this.game.physics.arcade.collide(this.enemies, this.level.collisionLayer);
 
+    this.game.physics.arcade.collide(this.player, this.level.deathLayer, () => {
+        console.log('DEAD!');
+        this.levelConfig = null;
+        this.game.state.start('Menu', true, true, undefined);
+    });
+
     this.game.physics.arcade.overlap(this.player, this.enemies, (player, enemy) => {
         if(this.player.body.touching.down && enemy.body.touching.up){
             return;
