@@ -46,3 +46,16 @@ export const checkIfAreaIsCovered = (matrix, x, y, width, height) => {
     }
     return res === 0;
 };
+
+export const filterCollisionTiles = flatmatrix => {
+	return flatmatrix.filter(tile => {
+		return tile !== 0;
+	}).reduce((uniques, tile) => {
+		if(uniques.indexOf(tile) < 0){
+			uniques.push(tile);
+		}
+		return uniques;
+	}, []).sort((a, b) => {
+		return a - b
+	});
+};

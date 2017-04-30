@@ -5,7 +5,7 @@ const levelGenerator = {
     create(){
         const levelBuilder = new LevelBuilder(levelConfig);
         return levelBuilder
-            .createLayers(200, 100)
+            .createLayers(34 * 5, 23 * 2)
             .build();
     }
 };
