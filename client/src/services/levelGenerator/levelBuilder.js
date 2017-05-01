@@ -18,17 +18,56 @@ import {
 
 import backgrounds from './models/backgrounds';
 
-const populateMatrix = (aMatrix, items, retry) => {
+// with frequency
+const enemyTypes = [
+    'bat', 'bat', 'bat', 'bat',
+    'bear', 'bear', 'bear', 'bear', 'bear', 'bear',
+    'bug',
+    'dino',
+    'dragonfly', 'dragonfly', 'dragonfly', 'dragonfly', 'dragonfly',
+    'frog',
+    'insect',
+    'jelly',
+    'native', 'native', 'native', 'native', 'native',
+    'parrot',
+    'ptero',
+    'spider', 'spider', 'spider', 'spider',
+    'tiger',
+    'turtle'
+];
+
+const findPlacesFor = (aMatrix, items, retry) => {
     let matrix = aMatrix.slice(0);
+    let enemies = [];
     while(retry--){
         let item = items[Math.floor(Math.random() * items.length)],
             x = Math.floor(Math.random() * (matrix[0].length - item[0].length)),
             y = Math.floor(Math.random() * (matrix.length - item.length));
         if(checkIfAreaIsCovered(matrix, x, y, item[0].length, item.length)){
+            enemies.push([x, y, item[0].length]);
             applyMatrix(matrix, item, x, y);
         }
     }
-    return matrix;
+    return {
+        enemies: enemies,
+        islands: matrix
+    };
+};
+
+const createEnemyAt = (xTile, yTile, tilesWidth) => {
+    return {
+		"type": enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
+		"number": 1,
+		"lifespan": Infinity,
+		"origin": {
+			"x": (xTile + tilesWidth / 2) * 16,
+			"y": yTile * 16
+		},
+		"boundTo": {
+			"x1": xTile * 16,
+			"x2": (xTile + tilesWidth) * 16
+		}
+    };
 };
 
 const getCollisionLayer = (flatMatrix, collisionTiles) => {
@@ -55,13 +94,17 @@ const islands = [
 const collisionTiles = [24,64,77,78,91,92,97,98,99,100,104,105,111,123,124,125,126,127,130,167,180,195,197,204,205,206,207,208,229,243];
 
 var LevelBuilder = function(levelConfig){
-    var level = levelConfig;
+    let level = levelConfig;
     return {
         createLayers(tilesWidth, tilesHeight){
             // 100: rare, 40: frequent
             const density = 100,
                 retry = Math.floor((tilesWidth * tilesHeight) / density);
-            groundLayer.data = flatten(populateMatrix(createMatrix(tilesHeight, tilesWidth, 0), islands, retry));
+            const placesFor = findPlacesFor(createMatrix(tilesHeight, tilesWidth, 0), islands, retry);
+
+            level.enemies = placesFor.enemies.map(enemy => createEnemyAt.apply(null, enemy));
+
+            groundLayer.data = flatten(placesFor.islands);
             collisionLayer.data = getCollisionLayer(groundLayer.data, collisionTiles);
             deathLayer.data = groundLayer.data.map(tile => 0);
 
