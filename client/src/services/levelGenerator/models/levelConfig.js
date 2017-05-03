@@ -1,12 +1,12 @@
 import level from './level';
 
 const levelConfig = {
-	"id": "rise-of-the-tide",
-	"name": "Rise of the Tide",
-	"tileset": "tileset-level-rise-of-the-tide",
-	"tilemap": "tilemap-level-rise-of-the-tide",
+	"id": "",
+	"name": "",
+	"tileset": "",
+	"tilemap": "",
 	"tiledJson": level,
-	"tilesetImage": "L1",
+	"tilesetImage": "",
 	"tilesetImageExtension": ".png",
 	"backgroundImage": "bg3seamless",
 	"backgroundImageExtension": ".jpg",

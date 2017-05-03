@@ -11,11 +11,9 @@ import {
     deathLayer
 } from './models/layers';
 
-import {
-    column,
-    snowball
-} from './models/islands';
-
+import platforms from './models/platforms';
+import tilemaps from './models/tilemaps';
+import tilesets from './models/tilesets';
 import backgrounds from './models/backgrounds';
 
 // with frequency
@@ -56,16 +54,16 @@ const findPlacesFor = (aMatrix, items, retry) => {
 
 const createEnemyAt = (xTile, yTile, tilesWidth) => {
     return {
-		"type": enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
-		"number": 1,
-		"lifespan": Infinity,
-		"origin": {
-			"x": (xTile + tilesWidth / 2) * 16,
-			"y": yTile * 16
+		type: enemyTypes[Math.floor(Math.random() * enemyTypes.length)],
+		number: 1,
+		lifespan: Infinity,
+		origin: {
+			x: (xTile + tilesWidth / 2) * 16,
+			y: yTile * 16
 		},
-		"boundTo": {
-			"x1": xTile * 16,
-			"x2": (xTile + tilesWidth) * 16
+		boundTo: {
+			x1: xTile * 16,
+			x2: (xTile + tilesWidth) * 16
 		}
     };
 };
@@ -79,33 +77,19 @@ const getCollisionLayer = (flatMatrix, collisionTiles) => {
     return matrix;
 };
 
-const islands = [
-    [[0,0,0,0],[0,77,78,0],[0,91,92,0],[0,0,0,0]],
-    [[0, 0, 0, 0], [77, 111, 111, 78], [91, 130, 130, 92], [0, 0, 0, 0]],
-    [[0, 0, 0, 0, 0, 0, 0], [77, 111, 111, 142, 111, 142, 78], [91, 130, 130, 144, 130, 144, 92], [0, 0, 0, 0, 0, 0, 0]],
-    [[0, 0, 0, 0], [0, 18, 19, 16], [15, 79, 23, 52], [58, 93, 39, 34], [112, 113, 34, 83], [77, 111, 111, 78], [91, 130, 130, 92], [0, 0, 0, 0]],
-    [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,77,111,78,0,0,0,0,0,0,0,0,0,0,0,0],[0,91,130,92,0,0,0,77,111,78,0,0,0,0,0,0],[0,0,0,0,0,0,0,91,130,92,0,0,0,77,78,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,91,92,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
-    [[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,64,0],[0,0,0,0,0,0,0,0,0],[0,0,0,0,0,64,0,0,0],[0,0,0,0,0,0,0,0,0],[0,0,0,64,0,0,0,0,0],[0,0,0,0,0,0,0,0,0],[0,64,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0]],
-    [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,77,111,78,0],[0,0,0,0,0,0,0,77,78,0,0,0,0,91,130,92,0],[0,77,111,78,0,0,0,91,92,77,78,0,0,0,0,0,0],[0,91,130,92,0,0,0,0,0,91,92,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]],
-    column,
-    [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,98,99,243,100,105,97,64,97,97,64,97,64,97,98,99,100,104,104,105,0],[0,122,127,126,206,0,0,0,0,0,0,0,0,0,245,127,125,126,127,0,0],[0,0,2684354681,2684354591,0,0,0,0,0,0,0,0,0,0,230,216,230,230,216,0,0]],
-    snowball
-];
-const collisionTiles = [24,64,77,78,91,92,97,98,99,100,104,105,111,123,124,125,126,127,130,167,180,195,197,204,205,206,207,208,229,243];
-
-var LevelBuilder = function(levelConfig){
-    let level = levelConfig;
+var LevelBuilder = function(id, levelConfig){
+    let level = Object.assign(levelConfig, tilemaps[id]);
     return {
         createLayers(tilesWidth, tilesHeight){
             // 100: rare, 40: frequent
             const density = 100,
                 retry = Math.floor((tilesWidth * tilesHeight) / density);
-            const placesFor = findPlacesFor(createMatrix(tilesHeight, tilesWidth, 0), islands, retry);
+            const placesFor = findPlacesFor(createMatrix(tilesHeight, tilesWidth, 0), platforms[id].groundLayer, retry);
 
             level.enemies = placesFor.enemies.map(enemy => createEnemyAt.apply(null, enemy));
 
             groundLayer.data = flatten(placesFor.islands);
-            collisionLayer.data = getCollisionLayer(groundLayer.data, collisionTiles);
+            collisionLayer.data = getCollisionLayer(groundLayer.data, platforms[id].collisionTiles);
             deathLayer.data = groundLayer.data.map(tile => 0);
 
             level.tiledJson.width = tilesWidth;
@@ -130,6 +114,7 @@ var LevelBuilder = function(levelConfig){
                 collisionLayer,
                 deathLayer
             ];
+            level.tiledJson.tilesets = [tilesets[id]];
             return this;
         },
         randomBackground(){
