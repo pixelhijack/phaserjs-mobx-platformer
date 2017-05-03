@@ -14,6 +14,8 @@ function update(){
         this.game.state.start('Menu', true, true, undefined);
     });
 
+    this.game.physics.arcade.collide(this.player, this.items.platforms);
+
     this.game.physics.arcade.overlap(this.player, this.enemies, (player, enemy) => {
         if(this.player.body.touching.down && enemy.body.touching.up){
             return;
@@ -60,7 +62,14 @@ function onKeyPress(){
     if(this.keys.space.isDown){
         if(this.player.spriteState.nohit < this.game.time.now && this.player.spriteState.hit < this.game.time.now){
             this.player.hit();
-            this.player.animations.play('hit');
+        }
+    }
+
+    if(this.keys.alt.isDown){
+        if(this.player.spriteState.nobuild < this.game.time.now) {
+            const x = this.player.facingRight ? this.player.body.x + 40 : this.player.body.x - 20,
+                y = this.player.body.y - 20;
+            this.player.build((x | 0), (y | 0));
         }
     }
 }

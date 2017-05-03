@@ -16,6 +16,11 @@ class Play {
         this.player = undefined;
         this.enemy = undefined;
         this.gameState = undefined;
+        this.items = {
+            bonus: undefined,
+            portals: undefined,
+            platforms: undefined
+        };
         this.level = {
             backgroundLayer: undefined,
             groundLayer: undefined,

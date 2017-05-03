@@ -62,6 +62,13 @@ function create(){
     this.keys = this.game.input.keyboard.createCursorKeys();
     this.keys.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
+    this.keys.alt = this.game.input.keyboard.addKey(Phaser.Keyboard.ALT);
+    this.keys.control = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
+    this.keys.shift = this.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
+
+    // items & platforms
+    this.items.platforms = new Phaser.Group(this.game);
+
     // score text
     this.menu = this.game.add.text(
         this.globalConfig.width - 120,
