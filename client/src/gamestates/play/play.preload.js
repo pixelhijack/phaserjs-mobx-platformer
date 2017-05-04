@@ -5,7 +5,7 @@ function preload(){
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.game.scale.pageAlignHorizontally = true;
     this.game.scale.pageAlignVertically = true;
-    this.scale.setMinMax(0, 0, this.globalConfig.width * 1.6, this.globalConfig.height * 1.6);
+    this.scale.setMinMax(0, 0, this.globalConfig.width * 1.4, this.globalConfig.height * 1.4);
     // ------!
 
     // assets to load relative to /assets/..

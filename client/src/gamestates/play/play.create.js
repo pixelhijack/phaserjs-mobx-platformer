@@ -24,6 +24,10 @@ function create(){
     );
     this.levelLoader.createLayers(this.levelConfig.layers);
 
+    if(this.levelConfig.maxHeight){
+        this.game.scale.setGameSize(this.globalConfig.width, this.levelConfig.maxHeight);
+    }
+
     // [SET LEVEL] fix background, resize
     this.level.backgroundLayer.fixedToCamera = this.levelConfig.fixedBackground;
     this.level.groundLayer.resizeWorld();
