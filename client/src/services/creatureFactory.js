@@ -37,15 +37,18 @@ function creatureFactory() {
 
     return {
         create: (levelConfig) => {
+            let props = this.creatureConfig[levelConfig.type];
+            props.boundTo = levelConfig.boundTo;
+
             const enemy = new AI(
                 this.game,
                 levelConfig.origin.x,
                 levelConfig.origin.y,
                 this.globalConfig.textureAtlasName,
-                this.creatureConfig[levelConfig.type],
+                props,
                 this.creatureConfig[levelConfig.type].behaviours
             );
-            enemy.setBounds(levelConfig.boundTo);
+            enemy.setBounds(enemy.props.boundTo);
             this.enemies.add(enemy);
         }
     };

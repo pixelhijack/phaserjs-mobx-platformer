@@ -24,6 +24,24 @@ class AI extends ExtendedSprite {
     turn(){
         this.scale.x *= -1;
     }
+    follow(){
+        const playerAt = this.game.state.states[this.game.state.current].gameState.playerAt;
+        if(
+            playerAt.x > this.body.x - this.props.sense &&
+            playerAt.x < this.body.x + this.props.sense &&
+            playerAt.y > this.body.y - this.props.sense &&
+            playerAt.y < this.body.y + this.props.sense
+        ){
+            this.setBounds({
+                x1: playerAt.x - this.props.sense / 2,
+                x2: playerAt.x + this.props.sense / 2,
+                y1: playerAt.y - this.props.sense / 2,
+                y2: playerAt.y + this.props.sense / 2
+            });
+        } else {
+            this.setBounds(this.props.boundTo);
+        }
+    }
     setBounds(boundTo){
         if(!boundTo || !Object.keys(boundTo).length){
             this.boundTo = null;

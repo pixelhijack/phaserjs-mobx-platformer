@@ -53,6 +53,7 @@ var creatureConfigs = {
         { action: 'turnIfBlocked' },
         { action: 'move' },
         { action: 'checkBounds' },
+        { action: 'follow' },
         { action: 'when', params: { probability: 0.01, action: 'jump' } }
     ],
     animations: [
@@ -207,6 +208,7 @@ var creatureConfigs = {
         { action: 'turnIfBlocked' },
         { action: 'move' },
         { action: 'checkBounds' },
+        { action: 'follow' },
         { action: 'when', params: { probability: 0.03, action: 'jump' } }
     ],
     animations: [
@@ -229,6 +231,7 @@ var creatureConfigs = {
         { action: 'turnIfBlocked' },
         { action: 'move' },
         { action: 'checkBounds' },
+        { action: 'follow' },
         { action: 'when', params: { probability: 0.02, action: 'jump' } }
     ],
     animations: [
@@ -251,6 +254,7 @@ var creatureConfigs = {
         { action: 'turnIfBlocked' },
         { action: 'move' },
         { action: 'checkBounds' },
+        { action: 'follow' },
         { action: 'when', params: { probability: 0.1, action: 'jump' } }
     ],
     animations: [

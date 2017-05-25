@@ -34,6 +34,10 @@ function update(){
 }
 
 function onKeyPress(){
+    // player make noise
+    this.gameState.playerAt.x = this.player.body.x | 0;
+    this.gameState.playerAt.y = this.player.body.y | 0;
+
     // stun => blocked
     if(this.player.isStunned){
         this.player.animations.play('stun');

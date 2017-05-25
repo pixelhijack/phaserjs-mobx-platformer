@@ -34,7 +34,11 @@ function create(){
 
     this.gameState = mobx.observable({
         initialised: false,
-        score: 0
+        score: 0,
+        playerAt: {
+            x: undefined,
+            y: undefined
+        }
     });
 
     this.updateState = mobx.action((change) => {
